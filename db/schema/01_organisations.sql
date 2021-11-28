@@ -2,5 +2,8 @@ DROP TABLE IF EXISTS organisations CASCADE;
 
 CREATE TABLE organisations (
   id SERIAL PRIMARY KEY NOT NULL,
-  name VARCHAR(255) NOT NULL
+  name VARCHAR(255) NOT NULL,
+  phone_number VARCHAR(32) NOT NULL,
+  email VARCHAR(255) NOT NULL,
+  website VARCHAR(255) NOT NULL
 );
