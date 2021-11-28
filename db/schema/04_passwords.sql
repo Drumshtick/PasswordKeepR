@@ -7,5 +7,5 @@ CREATE TABLE passwords (
   website_username VARCHAR(255) NOT NULL,
   website_password VARCHAR(255) NOT NULL,
   organization_id INTEGER REFERENCES organizations(id) ON DELETE CASCADE,
-  catagory_id INTEGER REFERENCES catagories(id) ON DELETE CASCADE
+  category_id INTEGER REFERENCES categories(id) ON DELETE CASCADE
 );
