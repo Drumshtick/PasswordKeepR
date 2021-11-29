@@ -2,7 +2,7 @@
 helper functions
 */
 
-const { db, Pool } = require('../db/dbConn');
+const {db, Pool} = require('../db/dbConn');
 
 /*
 Check if email exists in the users TABLE
@@ -10,11 +10,12 @@ return TRUE if it does exist
 return FALSE if it doesn't
 */
 const ifUserEmailExists = (email) => {
-  db.query(`
+  Pool.db.query(`
     SELECT *
     FROM users
     WHERE email = $1;
   `, [email]).then((result) => {
+    console.log(result);
     if (result.rows[0]) {
       return true;
     } else if (!result.rows[0]) {
