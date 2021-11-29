@@ -7,15 +7,18 @@ const router = express.Router();
 const { Pool } = require('../db/dbConn');
 
 module.exports = (db) => {
-  router.post('/new_org', (req, res) => {
-    // Assumes user_id session cookie = user id from TABLE users
-    const { user_id } = req.session;
-    const { org_name } = req.body;
+  router.post('/', (req, res) => {
+    const data = {
+      // Assumes user_id session cookie = user id from TABLE users
+      user_id: req.session.user_id,
+      // get  org name from post body
+      org_name: req.body.org_name
+    }
     // Check for session cookie created by login
     if (!user_id) {
       res.redirect('/login');
     } else if (user_id) {
-      addOrg(user_id)
+      addOrg(data)
       .then(organization => {
         if (!organization) {
           console.log("---------ERROR IN Creating entry in organization (improper return)--------");
@@ -32,7 +35,7 @@ module.exports = (db) => {
   });
 };
 
-const addOrg = (user_id, org_name) => {
+const addOrg = (data) => {
   // assumes user_id is the id from the users TABLE
   return Pool
   .query(`
@@ -40,7 +43,7 @@ const addOrg = (user_id, org_name) => {
   organizations (name)
   VALUES ($1)
   RETURNING *;
-  `, [org_name])
+  `, [data.org_name])
   .then((result) => {
     return result.rows[0];
   })
