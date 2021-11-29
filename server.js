@@ -38,11 +38,15 @@ app.use(express.static("public"));
 const usersRoutes = require("./routes/users");
 const loginRoutes = require('./routes/login');
 const registerRoutes = require("./routes/register");
+const createPasswordRoutes = require("./routes/password_gen");
+const indexRoute = require("./routes/index");
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/users", usersRoutes(db));
 app.use('/login', loginRoutes());
 app.use("/register", registerRoutes());
+app.use("/", indexRoute);
+app.use("/password_gen", createPasswordRoutes);
 // Note: mount other resources here, using the same pattern above
 
 // Home page
