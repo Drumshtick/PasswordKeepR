@@ -2,7 +2,7 @@
 helper functions
 */
 
-const { db, Pool } = require('../db/dbConn');
+const db = require('../db/dbConn');
 
 /*
 Check if email exists in the users TABLE
