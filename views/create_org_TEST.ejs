@@ -12,8 +12,9 @@
 <body>
   <%- include('partials/_header') %>
   <main id="new-org-wrapper">
-    <form action="/new_org" method="POST" id="new-org">
-
+    <form action="/new_org/" method="POST" id="new-org">
+      <label for="org_name">Enter the organization name here</label>
+      <input type="text" name="org_name" placeholder="Org name here">
     </form>
   </main>
 

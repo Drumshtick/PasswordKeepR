@@ -3,37 +3,40 @@
 Create a new organization
 */
 const express = require('express');
-const router = express.Router();
-const { Pool } = require('../db/dbConn');
+const createOrg = express.Router();
+const { db, Pool } = require('../db/dbConn');
 
-module.exports = (db) => {
-  router.post('/', (req, res) => {
-    const data = {
-      // Assumes user_id session cookie = user id from TABLE users
-      user_id: req.session.user_id,
-      // get  org name from post body
-      org_name: req.body.org_name
-    }
-    // Check for session cookie created by login
-    if (!user_id) {
-      res.redirect('/login');
-    } else if (user_id) {
-      addOrg(data)
-      .then(organization => {
-        if (!organization) {
-          console.log("---------ERROR IN Creating entry in organization (improper return)--------");
-          return;
-        } else if (organization) {
-          res.redirect('index');
-        }
-      })
-      .catch((error) => {
-        console.log("---------ERROR IN promise from addOrg--------");
-        console.log(error.message);
-      });
-    }
-  });
-};
+createOrg.get('/', (req, res) => {
+  res.render('create_org_TEST');
+});
+
+createOrg.post('/', (req, res) => {
+  const data = {
+    // Assumes user_id session cookie = user id from TABLE users
+    user_id: req.session.user_id,
+    // get  org name from post body
+    org_name: req.body.org_name
+  };
+  // Check for session cookie created by login
+  if (!user_id) {
+    res.redirect('/login');
+  } else if (user_id) {
+    addOrg(data)
+    .then(organization => {
+      if (!organization) {
+        console.log("---------ERROR IN Creating entry in organization (improper return)--------");
+        return;
+      } else if (organization) {
+        res.redirect('index');
+      }
+    })
+    .catch((error) => {
+      console.log("---------ERROR IN promise from addOrg--------");
+      console.log(error.message);
+    });
+  }
+});
+
 
 const addOrg = (data) => {
   // assumes user_id is the id from the users TABLE
@@ -52,3 +55,5 @@ const addOrg = (data) => {
     console.log(error.message);
   });
 };
+
+module.exports = createOrg;
