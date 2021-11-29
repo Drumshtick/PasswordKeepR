@@ -2,11 +2,13 @@
 helper functions
 */
 
-const express = require('express');
-const passwordRouter  = express.Router();
 const { db, Pool } = require('../db/dbConn');
 
-
+/*
+Check if email exists in the users TABLE
+return TRUE if it does exist
+return FALSE if it doesn't
+*/
 const ifUserEmailExists = (email) => {
   db.query(`
     SELECT *
