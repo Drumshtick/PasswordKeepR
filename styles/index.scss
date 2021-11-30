@@ -1,3 +1,7 @@
+.navbar {
+  z-index: 1000;
+}
+
 div.data-wrapper {
   scrollbar-width: thin;
   scrollbar-color: grey grey;
@@ -20,11 +24,14 @@ div.data-wrapper::-webkit-scrollbar-thumb {
 }
 
 main {
+  z-index: 1;
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   margin: 100px 0.5em;
   article {
+    margin: 1em;
     display: flex;
     justify-content: center;
     align-items: center;
