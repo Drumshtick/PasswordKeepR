@@ -1,0 +1,55 @@
+
+.navbar-password {
+  color: rgb(56, 56, 56);
+  font-size: 20px;
+}
+
+.navbar-password:hover {
+  text-decoration: none;
+  color: rgb(168, 168, 168);
+}
+
+.navbar {
+  min-height: 70px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.navbar-light .navbar-nav .nav-link {
+  color: rgba(0,0,0,.5);
+  margin-left: 12px;
+}
+
+.logout-button {
+  margin-top: -8px;
+  margin-left: 3px;
+}
+
+.navbar .navbar-nav a.nav-link {
+  margin-top: 4px;
+  color: white;
+}
+
+a.navbar-password {
+  color: white;
+}
+
+.navbar-header {
+  margin-bottom: 5px;
+}
+
+h5.navbar-header {
+  color: white;
+}
+
+.header-button {
+  margin: 0;
+}
+
+button {
+  margin-right: 10px;
+  margin-top: 12px;
+  margin-bottom: 5px;
+  min-width: 65px;
+}

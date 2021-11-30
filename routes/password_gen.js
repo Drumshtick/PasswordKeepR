@@ -7,13 +7,14 @@ const { db, Pool } = require('../db/dbConn');
 
 // get routes for password generator page
 passwordRouter.get("/", (req, res) => {
-  res.render("password_gen");
+  res.render("password_gen",);
 });
 
 passwordRouter.post("/", (req, res) => {
   console.log('hello world!');
   res.status(200).send('Working test!');
 });
+
 
 // export whole router
 module.exports = passwordRouter;
