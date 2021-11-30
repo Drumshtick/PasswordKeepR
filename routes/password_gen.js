@@ -21,20 +21,20 @@ const getUserOrganizations = function (userId) {
 };
 
 // get routes for password generator page
-const getUserOrganizations = function (userId) {
-  return db.query(`
-  SELECT DISTINCT organizations.name AS name
-  FROM organizations
-  JOIN users_organizations ON organizations.id = users_organizations.organization_id
-  WHERE user_id = ${userId};
-  `).then(res => {
+// const getUserOrganizations = function (userId) {
+//   return db.query(`
+//   SELECT DISTINCT organizations.name AS name
+//   FROM organizations
+//   JOIN users_organizations ON organizations.id = users_organizations.organization_id
+//   WHERE user_id = ${userId};
+//   `).then(res => {
       // console.log("--------------------------------------");
       // console.log("res: ", res);
-      return res.rows;
-    }).catch((err) => {
-      console.log(err.message);
-    });
-};
+//       return res.rows;
+//     }).catch((err) => {
+//       console.log(err.message);
+//     });
+// };
 
 const passwordGenerator = function (req) {
 
