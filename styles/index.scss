@@ -1,0 +1,120 @@
+div.data-wrapper {
+  scrollbar-width: thin;
+  scrollbar-color: grey grey;
+}
+
+/* Works on Chrome, Edge, and Safari */
+div.data-wrapper::-webkit-scrollbar {
+  width: 1px;
+  height: 1px;
+}
+
+div.data-wrapper::-webkit-scrollbar-track {
+  background: grey;
+}
+
+div.data-wrapper::-webkit-scrollbar-thumb {
+  background-color: grey;
+  border-radius: 20px;
+  border: 3px solid grey;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 100px 0.5em;
+  article {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+    header {
+      padding: 0.75rem 1.25rem;
+      margin-bottom: 0;
+      color: inherit;
+      border-bottom: 1px solid rgba(0,0,0,.125);
+      background-color: #28a745;
+      width: 100%;
+      border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;
+      h5 {
+        color: rgba(47, 79, 79, 0.7);
+      }
+      div {
+        a {
+          color: white !important;
+        }
+      }
+    }
+    section {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba(0,0,0,.03);
+//         padding: 0.5em;
+      div.data-wrapper {
+        height: 10%;
+        width: 35%;
+        min-width: 132px;
+        border: 1px solid rgba(0,0,0,.125);
+        margin: 0.5em;
+        border-radius: 2px;
+        overflow-x: auto;
+        white-space: nowrap;
+        position: relative;
+        .title-wrapper {
+          padding: 0.3em;
+          margin-bottom: 0;
+          height: 2em;
+          width: 100%;
+          overflow-y: hidden;
+          background-color: rgba(0, 0, 0, 0.03);
+          .data-title {
+            font-weight: 500;
+            margin-top: 0;
+            color: rgba(47, 79, 79, 0.452);
+          }
+        }
+        #password {
+          justify-content: flex-start;
+          }
+        .value-wrapper {
+          display: flex;
+          justify-content: center;
+          p.data-value {
+            display: inline-block;
+            margin-top: 1em;
+            margin-left: 0.4em;
+            margin-bottom: 0;
+            margin-right: .4em;
+            font-weight: 700;
+          }
+        }
+        i {
+          color: grey;
+          position: absolute;
+          top: 5px;
+          right: 5px;
+          transition: color 1s;
+          cursor: pointer;
+        }
+        i:hover {
+          color: darkgrey;
+        }
+      }
+    }
+    footer {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      button {
+        width: 45%;
+        min-width: 90px;
+      }
+    }
+  }
+}
