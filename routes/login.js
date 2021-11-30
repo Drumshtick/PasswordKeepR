@@ -10,7 +10,6 @@ module.exports = function() {
     res.render('login');
   });
   router.post('login', (req, res) => {
-    console.log("POSTED LOGIN------------------------");
     res.redirect('login');
   });
   return router;

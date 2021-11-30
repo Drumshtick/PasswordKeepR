@@ -15,7 +15,6 @@ const ifUserEmailExists = (email) => {
     FROM users
     WHERE email = $1;
   `, [email]).then((result) => {
-    console.log(result);
     if (result.rows[0]) {
       return true;
     } else if (!result.rows[0]) {
