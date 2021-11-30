@@ -1,10 +1,16 @@
 const express = require('express');
 const router = express.Router();
-
-module.exports = () => {
+module.exports = function() {
+  router.get('/:id', (req, res) => {
+    const { id } = req.params;
+    req.session.user_id = id;
+    res.redirect('/');
+  });
   router.get('/', (req, res) => {
-    console.log('logged in successfully');
-    res.send('success!');
-  })
+    res.render('login');
+  });
+  router.post('login', (req, res) => {
+    res.redirect('login');
+  });
   return router;
 };

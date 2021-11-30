@@ -9,6 +9,16 @@ const app = express();
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 // PG database client/connection setup
+// Session cookie
+const cookieSession = require('cookie-session');
+app.use(cookieSession({
+  name: 'session',
+  keys: ['1L0V3C00K135'],
+
+  // Cookie Options
+  maxAge: 24 * 60 * 60 * 1000 // 24 hours
+}));
+
 const { Pool } = require("pg");
 const dbParams = require("./lib/db.js");
 const db = new Pool(dbParams);
@@ -36,15 +46,13 @@ app.use(express.static("public"));
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
-const loginRoutes = require('./routes/login');
-const registerRoutes = require("./routes/register");
+const login = require('./routes/login');
 const createPasswordRoutes = require("./routes/password_gen");
 const indexRoute = require("./routes/index");
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/users", usersRoutes(db));
-app.use('/login', loginRoutes());
-app.use("/register", registerRoutes());
+app.use('/login', login());
 app.use("/", indexRoute);
 app.use("/password_gen", createPasswordRoutes);
 // Note: mount other resources here, using the same pattern above
