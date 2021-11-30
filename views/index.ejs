@@ -19,51 +19,66 @@
 <body>
 
 <%- include('partials/_header') %>
-    <main id="passwords-container">
-      <% for (let index in db_results) {%>
-        <!-- <p><%= db_results[index].url %></p> -->
-        <article class="password-entry card">
-          <header class="url">
-            <h5>URL</h1>
-            <div><a href="<%= db_results[index].url %>" target="_blank"><%= db_results[index].url %></a></div>
-          </header>
-          <section class="password-data">
-            <div class="data-wrapper">
-              <div class="title-wrapper"><p class="data-title ">username</p></div>
-              <div class="value-wrapper">
-                <p class="data-value"><%= db_results[index].user_id %></p>
+<% if (!noEntries) { %>
+  <main id="passwords-container">
+        <% for (let index in db_results) {%>
+          <article class="password-entry card">
+            <header class="url">
+              <h5>URL</h1>
+              <div><a href="<%= db_results[index].url %>" target="_blank"><%= db_results[index].url %></a></div>
+            </header>
+            <section class="password-data">
+              <div class="data-wrapper">
+                <div class="title-wrapper"><p class="data-title ">username</p></div>
+                <div class="value-wrapper">
+                  <p class="data-value"><%= db_results[index].user_id %></p>
+                </div>
+                <i class="fas fa-clipboard"></i>
               </div>
-              <i class="fas fa-clipboard"></i>
-            </div>
-            <div class="data-wrapper">
-              <div class="title-wrapper"><p class="data-title">password</p></div>
-              <div id="password" class="value-wrapper">
-                <p class="data-value"><%= db_results[index].password_text %></p>
+              <div class="data-wrapper">
+                <div class="title-wrapper"><p class="data-title">password</p></div>
+                <div id="password" class="value-wrapper">
+                  <p class="data-value"><%= db_results[index].password_text %></p>
+                </div>
+                <i class="fas fa-clipboard"></i>
               </div>
-              <i class="fas fa-clipboard"></i>
-            </div>
-            <div class="data-wrapper">
-              <div class="title-wrapper"><p class="data-title">category</p></div>
-              <div class="value-wrapper">
-                <p class="data-value"><%= db_results[index].category %></p>
+              <div class="data-wrapper">
+                <div class="title-wrapper"><p class="data-title">category</p></div>
+                <div class="value-wrapper">
+                  <p class="data-value"><%= db_results[index].category %></p>
+                </div>
+                <i class="fas fa-clipboard"></i>
               </div>
-              <i class="fas fa-clipboard"></i>
-            </div>
-            <div class="data-wrapper">
-              <div class="title-wrapper"><p class="data-title">organization</p></div>
-              <div class="value-wrapper">
-                <p class="data-value"><%= db_results[index].organization_id %></p>
+              <div class="data-wrapper">
+                <div class="title-wrapper"><p class="data-title">organization</p></div>
+                <div class="value-wrapper">
+                  <p class="data-value"><%= db_results[index].organization_id %></p>
+                </div>
+                <i class="fas fa-clipboard"></i>
               </div>
-              <i class="fas fa-clipboard"></i>
-            </div>
-          </section>
-          <footer class="actions card-header">
-            <button type="button" class="btn btn-primary">Edit</button>
-            <button type="button" class="btn btn-danger">Delete</button>
-          </footer>
-        </article>
+            </section>
+            <footer class="actions card-header">
+              <button type="button" class="btn btn-primary">Edit</button>
+              <button type="button" class="btn btn-danger">Delete</button>
+            </footer>
+          </article>
+        <% } %>
+      </main>
       <% } %>
-    </main>
+      <% if (noEntries) { %>
+        <main>
+          <article class="no-entries card">
+            <header class="url">
+              <i class="fas fa-exclamation-triangle"></i>
+              <h4>You have no passwords stored</h1>
+            </header>
+            <section>
+              <h4>To get started, create an entry</h6>
+              <a href="/password_gen"><button type="button" class="btn btn-primary">Here</button></a>
+            </section>
+          </article>
+        </main>
+      <% } %>
     <script src="https://code.jquery.com/jquery-3.5.1.js"
     integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"

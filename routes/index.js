@@ -10,10 +10,13 @@ indexRoute.get("/", (req, res) => {
   const { user_id } = req.session;
   getPasswords(user_id)
   .then((db_results) => {
+    //if results are returned display them
     if (db_results.length > 0) {
-      return res.render("index", {db_results});
+      return res.render("index", {db_results, noEntries: false});
     }
-      // return res.render("index", {db_results});
+    // Otherwise display box to show that no entries are available
+    // and a button is displayed to make some
+      return res.render("index", {db_results, noEntries: true});
   })
   .catch((err) => {
     console.log(err.message);
