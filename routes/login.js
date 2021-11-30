@@ -5,6 +5,13 @@ module.exports = function() {
     const { id } = req.params;
     req.session.user_id = id;
     res.redirect('/');
-  })
+  });
+  router.get('/', (req, res) => {
+    res.render('login');
+  });
+  router.post('login', (req, res) => {
+    console.log("POSTED LOGIN------------------------");
+    res.redirect('login');
+  });
   return router;
 };
