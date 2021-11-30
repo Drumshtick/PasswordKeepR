@@ -4,11 +4,16 @@ const indexRoute  = express.Router();
 const db = require('../db/dbConn');
 // GET route
 indexRoute.get("/", (req, res) => {
+  if (req.session.user_id === undefined) {
+    res.redirect(401, '/login');
+  }
   const { user_id } = req.session;
   getPasswords(user_id)
   .then((db_results) => {
-    console.log(db_results);
-    res.render("index", {db_results});
+    if (db_results.length > 0) {
+      return res.render("index", {db_results});
+    }
+      // return res.render("index", {db_results});
   })
   .catch((err) => {
     console.log(err.message);
