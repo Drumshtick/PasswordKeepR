@@ -42,9 +42,11 @@ $(document).ready(function () {
     $('#pwordSubmission').on('click', function () {
       const errors = {
         urlempty: "Sorry. You can't leave the URL field empty. Try again!",
-        checkBoxesEmpty: "Sorry. You can't generate a password with all boxes unchecked. Try again!"
+        checkBoxesEmpty: "Sorry. You can't generate a password with all boxes unchecked. Try again!",
+        usernameEmpty: "Sorry. You can't leave the username field empty. Try again!"
       }
       const url = $('#urlInput').val();
+      const username = $('#username').val();
       const passwordLength = $('#passwordLength').val();
       const upperCaseVal = document.querySelector('#upperCaseCheck').checked;
       const lowerCaseVal = document.querySelector('#lowerCaseCheck').checked;
@@ -59,6 +61,13 @@ $(document).ready(function () {
         dismissAlert();
         return;
       }
+
+      if (!username) {
+        fillAlertError(errors.usernameEmpty);
+        dismissAlert();
+        return;
+      }
+
 
       if (!upperCaseVal && !lowerCaseVal && !numberCheckVal && !symbolVal) {
         fillAlertError(errors.checkBoxesEmpty);
@@ -76,6 +85,7 @@ $(document).ready(function () {
           symbols: symbolVal,
           organisationName: organisationName,
           category: category,
+          username :username
         }
       })
       .then(function (response) {
@@ -89,9 +99,11 @@ $(document).ready(function () {
     $('#pwordSubmission2').on('click', function () {
       const errors = {
         urlempty: "Sorry. You can't leave the URL field empty. Try again!",
-        passwordEmpty: "Sorry. You can't create a password that is empty. Try again!"
+        usernameEmpty: "Sorry. You can't leave the username field empty. Try again!",
+        passwordEmpty: "Sorry. You can't create a password that is empty. Try again!",
       }
       const url2 = $('#urlInput2').val();
+      const username2 = $('#username2').val();
       const password2 = document.querySelector('#passwordField2').value;
       const organisationName2 = document.querySelector('#orgName2').value;
       const category2 = document.querySelector('#catName2').value;
@@ -103,6 +115,13 @@ $(document).ready(function () {
         return;
       }
 
+      if (!username2) {
+        fillAlertError(errors.usernameEmpty);
+        dismissAlert();
+        return;
+      }
+
+
       if (!password2) {
         fillAlertError(errors.passwordEmpty);
         dismissAlert();
@@ -112,6 +131,7 @@ $(document).ready(function () {
       $.ajax({
           method: 'POST', url: '/password_gen/', data: {
           url: url2,
+          username :username2,
           organisationName: organisationName2,
           category: category2,
           password: password2

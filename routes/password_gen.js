@@ -135,10 +135,10 @@ const writePassTodb = function(data) {
   return db
   .query(`
     INSERT INTO
-    passwords (user_id, organization_id, category, url, password_text)
-    VALUES ($1, $2, $3, $4, $5)
+    passwords (user_id, organization_id, category, url, password_text,username)
+    VALUES ($1, $2, $3, $4, $5, $6)
     RETURNING *;
-  `, [data.user_id, data.organization_id, data.category, data.url, data.password_text])
+  `, [data.user_id, data.organization_id, data.category, data.url, data.password_text,data.username])
   .then((results) => {
     return results.rows;
   })
@@ -149,7 +149,7 @@ const writePassTodb = function(data) {
 
 passwordRouter.post("/", (req, res) => {
   const { user_id } = req.session;
-  const {organisationName, category, url} = req.body;
+  const {organisationName, category, url, username} = req.body;
   if(req.body.length){
     const password_text = passwordGenerator(req);
     getOrgID(organisationName).then((result) => {
@@ -158,7 +158,8 @@ passwordRouter.post("/", (req, res) => {
         'organization_id': result.id,
         'category': category,
         url,
-        password_text
+        password_text,
+        username
       };
       writePassTodb(data)
       .then(result => {
@@ -174,6 +175,7 @@ passwordRouter.post("/", (req, res) => {
       'organization_id': result.id,
       'category': category,
       url,
+      username,
       'password_text': password
     };
     // console.log("made obj data: ", data);
