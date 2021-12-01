@@ -1,36 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-  <%- include('partials/_header') %>
+
 <head>
-  <title>Home Page</title>
-
-    <!-- Boostrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
-
-
-  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/main.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
-
-  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-  <script type="text/javascript" src="/scripts/app.js"></script>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>passwordKeepR</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+  integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="../styles/index.css">
+  <link rel="stylesheet" href="../styles/header.css" type="text/css" />
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+  <!-- Font Awesome Lib CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css" integrity="sha512-YWzhKL2whUzgiheMoBFwW8CKV4qpHQAEuvilg9FAn5VJUDwKZZxkJNuGM4XkWuk94WCrrwslk8yWNGmY1EduTA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
-
 <body>
 
-    <!-- login page form -->
-    <section class='login_form'>
-      <form action='/login' method='POST' class='form-group'>
-        <div class='login-col'>
-          <input type='email' name='email' placeholder='username'>
-        </div>
-        <div class='login-col'>
-          <input type='password' name='password' placeholder='Password'>
-        </div>
-        <button type='submit'>Login</button>
-      </form>
-    </section>
-</body>
-
-</html>
+  <%- include('partials/_header') %>
+  <% if (!noEntries) { %>
+    <main id="passwords-container">
+      <% for (let index in db_results) {%>
+        <article class="password-entry card">
+          <header class="url">
+            <h5>URL</h1>
+              <div><a href="<%= db_results[index].url %>" target="_blank"><%= db_results[index].url %></a></div>
+            </header>
+            <section class="password-data">
+              <div class="data-wrapper">
+                <div class="title-wrapper"><p class="data-title ">username</p></div>
+                <div class="value-wrapper">
+                  <p class="data-value"><%= db_results[index].user_id %></p>
+                </div>
+                <i class="fas fa-clipboard"></i>
+              </div>
+              <div class="data-wrapper">
+                <div class="title-wrapper"><p class="data-title">password</p></div>
+                <div id="password" class="value-wrapper">
+                  <p class="data-value"><%= db_results[index].password_text %></p>
+                </div>
+                <i class="fas fa-clipboard"></i>
+              </div>
+              <div class="data-wrapper">
+                <div class="title-wrapper"><p class="data-title">category</p></div>
+                <div class="value-wrapper">
+                  <p class="data-value"><%= db_results[index].category %></p>
+                </div>
+                <i class="fas fa-clipboard"></i>
+              </div>
+              <div class="data-wrapper">
+                <div class="title-wrapper"><p class="data-title">organization</p></div>
+                <div class="value-wrapper">
+                  <p class="data-value"><%= db_results[index].organization_id %></p>
+                </div>
+                <i class="fas fa-clipboard"></i>
+              </div>
+            </section>
+            <footer class="actions card-header">
+              <button type="button" class="btn btn-primary">Edit</button>
+              <button type="button" class="btn btn-danger">Delete</button>
+            </footer>
+          </article>
+        <% } %>
+      </main>
+      <% } %>
+      <% if (noEntries) { %>
+        <main>
+          <article class="no-entries card">
+            <header class="url">
+              <i class="fas fa-exclamation-triangle"></i>
+              <h4>You have no passwords stored</h1>
+              </header>
+              <section>
+                <h4>To get started, create an entry</h6>
+                  <a href="/password_gen"><button type="button" class="btn btn-primary">Here</button></a>
+                </section>
+              </article>
+            </main>
+            <% } %>
+            <script src="https://code.jquery.com/jquery-3.5.1.js"
+            integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+            <script type="text/javascript" src="../scripts/index-page.js"></script>
+          </body>
+          </html>
