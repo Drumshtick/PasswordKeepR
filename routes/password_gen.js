@@ -163,6 +163,7 @@ passwordRouter.post("/", (req, res) => {
       writePassTodb(data)
       .then(result => {
         console.log(result);
+        res.send("worked");
         // return res.redirect('/');
       })
     });
