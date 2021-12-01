@@ -27,7 +27,7 @@
               <div><a href="<%= db_results[index].url %>" target="_blank"><%= db_results[index].url %></a></div>
             </header>
             <section class="password-data">
-              <div class="data-wrapper">
+              <div class="data-wrapper username">
                 <div class="title-wrapper"><p class="data-title ">username</p></div>
                 <div class="value-wrapper">
                   <p class="data-value"><%= db_results[index].username %></p>
@@ -41,9 +41,9 @@
                 </div>
                 <i class="fas fa-clipboard"></i>
               </div>
-              <div class="data-wrapper">
+              <div class="data-wrapper password">
                 <div class="title-wrapper"><p class="data-title">password</p></div>
-                <div id="password" class="value-wrapper">
+                <div class="value-wrapper">
                   <p class="data-value"><%= db_results[index].password_text %></p>
                 </div>
                 <i class="fas fa-clipboard"></i>
@@ -64,8 +64,8 @@
               </div>
             </section>
             <footer class="actions card-header">
-              <button type="button" class="btn btn-primary">Edit</button>
-              <button type="button" class="btn btn-danger">Delete</button>
+              <button type="button" class="edit btn btn-primary">Edit</button>
+              <button type="button" class="btn delete btn-danger">Delete</button>
             </footer>
           </article>
         <% } %>
