@@ -89,11 +89,13 @@ $(document).ready(function () {
         }
       })
       .then(function (response) {
+
         console.log("response from the server is: ", response);
         const notification = 'Typed password created! Go to the homepage to view it!';
         fillAlert(notification);
         dismissAlert();
       });
+
     });
 
     $('#pwordSubmission2').on('click', function () {
