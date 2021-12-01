@@ -6,17 +6,16 @@
  */
 
 const express = require('express');
-const router  = express.Router();
-
-module.exports = (db) => {
-  router.get("/", (req, res) => {
-    if (req.session.user_id) {
-      res.redirect(401, '/login');
-    }
-    const { user_id } = req.session;
-    res.render('edit');
-  });
-  return router;
-};
+const editRouter  = express.Router();
 
 
+editRouter.post('/', (req, res) => {
+  if (req.session.user_id === undefined) {
+    return res.redirect(401, '/login');
+  }
+const { user_id } = req.session;
+const {"password-text": password_text, username} = req.body;
+console.log("user_id: ", user_id);
+console.log("password: ", password-text, "username: ", username);
+});
+module.exports = editRouter;

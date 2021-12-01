@@ -1,6 +1,7 @@
 
 const express = require('express');
 const indexRoute  = express.Router();
+const editRoute = express.Router();
 const db = require('../db/dbConn');
 // GET route
 indexRoute.get("/", (req, res) => {
@@ -84,5 +85,8 @@ const editPasswordEntry = function(data){
   });
 };
 
+
+
 // export modules
 module.exports = indexRoute;
+

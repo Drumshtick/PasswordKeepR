@@ -55,8 +55,8 @@ const editRoute = require("./routes/edit");
 app.use("/api/users", usersRoutes(db));
 app.use('/login', login());
 app.use("/", indexRoute);
-app.use("/password_gen", createPasswordRoutes);
 app.use("/edit", editRoute);
+app.use("/password_gen", createPasswordRoutes);
 // Note: mount other resources here, using the same pattern above
 
 // Home page
