@@ -1,6 +1,6 @@
 $(document).ready(function() {
   // On click of clipboard in passwords data elements
-  $('i.fa-clipboard').on("click", function() {
+  $('i.fa-clipboard').on("click touchstart", function() {
     // Get the element that was clicked
     const elementText = $(this).siblings(".value-wrapper")
       .children('.data-value')
