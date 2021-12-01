@@ -10,6 +10,7 @@ indexRoute.get("/", (req, res) => {
   const { user_id } = req.session;
   getPasswords(user_id)
   .then((db_results) => {
+    console.log(db_results);
     //if results are returned display them
     if (db_results.length > 0) {
       return res.render("index", {db_results, noEntries: false});
@@ -26,7 +27,8 @@ indexRoute.get("/", (req, res) => {
 const getPasswords = function(user_id) {
   return db
   .query(`
-  SELECT users.email as user_id, organizations.name as organization_id, category, url, password_text
+  SELECT passwords.username as username, organizations.name as organization_id,
+  category, url, password_text, users.email as user_id
   FROM passwords
   JOIN organizations ON organization_id = organizations.id
   JOIN users ON passwords.user_id = users.id
