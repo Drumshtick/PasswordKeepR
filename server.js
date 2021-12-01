@@ -49,12 +49,14 @@ const usersRoutes = require("./routes/users");
 const login = require('./routes/login');
 const createPasswordRoutes = require("./routes/password_gen");
 const indexRoute = require("./routes/index");
+const editRoute = require("./routes/edit");
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/users", usersRoutes(db));
 app.use('/login', login());
 app.use("/", indexRoute);
 app.use("/password_gen", createPasswordRoutes);
+app.use("/edit", editRoute);
 // Note: mount other resources here, using the same pattern above
 
 // Home page
