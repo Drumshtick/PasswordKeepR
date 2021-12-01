@@ -41,8 +41,10 @@ $('button.edit').on('click touchstart', function() {
   const password =$(targetParent).children('section.password-data')
     .children('div.data-wrapper.password').children('div.value-wrapper')
     .children('input.data').val();
+  const url = $(targetParent).children('header').children('div').children('a').text();
+
   console.log("values: ", username, password);
-$.post('http://localhost:8080/edit', {username, 'password-text': password})
+$.post('http://localhost:8080/edit', {username, password, url})
   .then((response) => {console.log(response)})
   .catch((err) => {console.log(err.message)})
 });
