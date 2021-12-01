@@ -58,7 +58,7 @@
             </section>
             <footer class="actions card-header">
               <button type="button" class="btn btn-primary">Edit</button>
-              <!-- DELETE btn HERE -->
+              <button id="HERE" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button>
             </footer>
           </article>
           <% } %>
@@ -79,14 +79,13 @@
                 </article>
               </main>
               <% } %>
-              <button id="HERE" type="button" style="margin-top: 150px;" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button>
               <!-- Modal -->
               <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
                       <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                      <i class="far fa-window-close" data-bs-dismiss="modal" aria-label="Close"></i>
                     </div>
                     <div class="modal-body">
                       ...
