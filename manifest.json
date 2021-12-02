@@ -1,0 +1,13 @@
+{
+  "manifest_version": 2,
+  "name": "PasswordKeeper",
+  "version": "1.0.0",
+  "description": "Quick access to PasswordKeeper",
+   "icon":{},
+  "browser_action": {
+      "default_icon": "icon.png",
+      "default_popup": "popup.html"
+  },
+  "permissions" :["activeTab"]
+
+}

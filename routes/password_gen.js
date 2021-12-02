@@ -5,13 +5,29 @@ const db = require('../db/dbConn');
 const generator = require('generate-password');
 //db.connect();
 
+// const getUserOrganizations = function (userId) {
+//   return db.query(`
+//   SELECT DISTINCT organizations.name AS name
+//   FROM organizations
+//   JOIN users_organizations ON organizations.id = users_organizations.organization_id
+//   WHERE user_id = ${userId};`
+//   ).then(res => {
+//       // console.log("--------------------------------------");
+//       // console.log("res: ", res);
+//       return res.rows;
+//     }).catch((err) => {
+//       console.log(err.message);
+//     });
+// };
+
+// get routes for password generator page
 const getUserOrganizations = function (userId) {
   return db.query(`
   SELECT DISTINCT organizations.name AS name
   FROM organizations
   JOIN users_organizations ON organizations.id = users_organizations.organization_id
-  WHERE user_id = ${userId};`
-  ).then(res => {
+  WHERE user_id = ${userId};
+  `).then(res => {
       // console.log("--------------------------------------");
       // console.log("res: ", res);
       return res.rows;
@@ -19,22 +35,6 @@ const getUserOrganizations = function (userId) {
       console.log(err.message);
     });
 };
-
-// get routes for password generator page
-// const getUserOrganizations = function (userId) {
-//   return db.query(`
-//   SELECT DISTINCT organizations.name AS name
-//   FROM organizations
-//   JOIN users_organizations ON organizations.id = users_organizations.organization_id
-//   WHERE user_id = ${userId};
-//   `).then(res => {
-      // console.log("--------------------------------------");
-      // console.log("res: ", res);
-//       return res.rows;
-//     }).catch((err) => {
-//       console.log(err.message);
-//     });
-// };
 
 const passwordGenerator = function (req) {
 
@@ -135,10 +135,10 @@ const writePassTodb = function(data) {
   return db
   .query(`
     INSERT INTO
-    passwords (user_id, organization_id, category, url, password_text,username)
-    VALUES ($1, $2, $3, $4, $5, $6)
+    passwords (user_id, organization_id, category, url, password_text)
+    VALUES ($1, $2, $3, $4, $5)
     RETURNING *;
-  `, [data.user_id, data.organization_id, data.category, data.url, data.password_text,data.username])
+  `, [data.user_id, data.organization_id, data.category, data.url, data.password_text])
   .then((results) => {
     return results.rows;
   })
@@ -149,7 +149,7 @@ const writePassTodb = function(data) {
 
 passwordRouter.post("/", (req, res) => {
   const { user_id } = req.session;
-  const {organisationName, category, url, username} = req.body;
+  const {organisationName, category, url} = req.body;
   if(req.body.length){
     const password_text = passwordGenerator(req);
     getOrgID(organisationName).then((result) => {
@@ -158,13 +158,11 @@ passwordRouter.post("/", (req, res) => {
         'organization_id': result.id,
         'category': category,
         url,
-        password_text,
-        username
+        password_text
       };
       writePassTodb(data)
       .then(result => {
         console.log(result);
-        res.send("worked");
         // return res.redirect('/');
       })
     });
@@ -176,7 +174,6 @@ passwordRouter.post("/", (req, res) => {
       'organization_id': result.id,
       'category': category,
       url,
-      username,
       'password_text': password
     };
     // console.log("made obj data: ", data);
