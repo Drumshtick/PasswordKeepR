@@ -1,6 +1,4 @@
 $(document).ready(function() {
-<<<<<<< HEAD
-=======
   const fillAlert = function (notification) {
     console.log("ran!");
     $('#alert_placeholder').html('<div class="alert alert-primary" role="alert" style="position:abolute;z-index:999;">' + notification + '</div>');
@@ -18,7 +16,6 @@ $(document).ready(function() {
   };
 
   // On click of clipboard in passwords data elements
->>>>>>> master
   $('i.fa-clipboard').on("click touchstart", function() {
     // On click of clipboard in passwords data elements
     // Get the element that was clicked

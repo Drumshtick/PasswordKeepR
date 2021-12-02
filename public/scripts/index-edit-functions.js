@@ -20,11 +20,13 @@ $(document).ready(function() {
       .children('p.data-value');
 
 
-      $(username).parent().append('<input class="data data-value" type="text" name="username" class="form-control" value="'+$(username).text()+'">');
       $(username).hide();
+      $(username).parent().append('<input class="data data-value" type="text" name="username" class="form-control" value="'+$(username).text()+'">');
+      $('div.data-wrapper.password').addClass('editMode');
 
       $(password).hide();
       $(password).parent().append('<input class="data data-value" type="text" name="password-text" class="form-control" value="'+$(password).text()+'">');
+      $('div.data-wrapper.username').addClass('editMode');
 
       $(deleteButton).hide();
       $(deleteButton).siblings('button.cancel').show();
