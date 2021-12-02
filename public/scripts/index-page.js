@@ -86,6 +86,7 @@ $(document).ready(function() {
           $(cancelButton).text('Delete');
           $(saveButton).removeClass('save btn-secondary');
           $(saveButton).text("Edit");
+          $(saveButton).addClass('edit');
           return;
         }
       })
@@ -123,6 +124,7 @@ $(document).ready(function() {
       $(cancelButton).text('Delete');
       $(saveButton).removeClass('save btn-secondary');
       $(saveButton).text("Edit");
+      $(saveButton).addClass('edit');
     }
   });
 });
