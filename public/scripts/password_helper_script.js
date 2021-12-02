@@ -94,6 +94,7 @@ $(document).ready(function () {
         const notification = 'Typed password created! Go to the homepage to view it!';
         fillAlert(notification);
         dismissAlert();
+        window.location.href = "http://localhost:8080/";
       });
 
     });
@@ -144,6 +145,7 @@ $(document).ready(function () {
         const notification = 'Typed password created! Go to the homepage to view it!';
         fillAlert(notification);
         dismissAlert();
+        window.location.href = "http://localhost:8080/";
       });
     });
   }
