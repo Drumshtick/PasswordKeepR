@@ -94,7 +94,7 @@ $(document).ready(function () {
         const notification = 'Password created! Redirecting to homepage';
         fillAlert(notification);
         dismissAlert();
-       setTimeout(function () {window.location.href = "http://localhost:8080/"}, 2000) ;
+        setTimeout(function () {window.location.href = "http://localhost:8080/"}, 2000) ;
       });
 
     });

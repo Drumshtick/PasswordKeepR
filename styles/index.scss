@@ -2,6 +2,23 @@
   z-index: 1000;
 }
 
+/* https://stackoverflow.com/questions/39811673/change-the-height-of-ui-bootstrap-alert */
+.alert {
+  margin-bottom: 1px;
+  min-height: 35px;
+  line-height:35px;
+  padding:0px 35px;
+  position: fixed;
+  width: 100%;
+  top: 70px;
+  left: 0;
+}
+
+.alert p {
+  margin: 4px 0;
+}
+
+
 div.data-wrapper {
   scrollbar-width: thin;
   scrollbar-color: grey grey;
