@@ -29,6 +29,7 @@ article:hover {
 }
 
 main {
+  width: 100%;
   z-index: 1;
   display: flex;
   flex-wrap: wrap;
@@ -128,9 +129,6 @@ main {
         width: 45%;
         min-width: 90px;
         transition: all 1s;
-      }
-      button.save {
-        // background-color: purple;
       }
     }
   }

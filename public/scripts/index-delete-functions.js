@@ -19,19 +19,21 @@ $(document).ready(function() {
   `;
   // first delete button on modal (initial)
   $('button.delete').on('click', function() {
-    CURRENT_TARGET_PARENT = $(this).parent().parent();
-    $('button.remove-from-db').on('click', function() {
-        $('div.modal-body').children('h6').text("Are you absolutely certain?");
-        $('div.modal-body').children('h6').addClass('strong')
-        $('div.modal-body').children('p').hide();
-        $('#yes').show();
-        $('button.remove-from-db').hide();
-        return;
-      });
+      CURRENT_TARGET_PARENT = $(this).parent().parent();
+      $('#exampleModal').modal('toggle');
       return;
     });
 
-    // Second promopt in modal (confirms delete)
+    $('button.remove-from-db').on('click', function() {
+      $('div.modal-body').children('h6').text("Are you absolutely certain?");
+      $('div.modal-body').children('h6').addClass('strong')
+      $('div.modal-body').children('p').hide();
+      $('#yes').show();
+      $('button.remove-from-db').hide();
+      return;
+    });
+
+    // Second prompt in modal (confirms delete)
     // sends post
     $('#yes').on('click', function() {
       const url = $(CURRENT_TARGET_PARENT).children('header').children('div').children('a').text();
@@ -40,25 +42,36 @@ $(document).ready(function() {
         .children('p.data-value').text();
         $.post('http://localhost:8080/delete', {username, url})
         .then((response) => {
+
           if (response === 'OK') {
             $('div.modal-body').children('h6').text("SUCCESS");
+            $('#yes').attr('disabled', 'disabled');
+            $('div.modal-footer').children('button.btn-secondary').attr('disabled', 'disabled');
             $(CURRENT_TARGET_PARENT).remove();
+            // If no passwords on DOM render message
+            // with link to create a password
             if ($('main').children().length === 0) {
               $('main').append(NO_STORED_PASSWORDS);
             }
             setTimeout(() => {
               $('#exampleModal').modal('toggle');
               setTimeout(() => {
+                // Reset modal to initial state
                 $('div.modal-body').children('h6').text("Are you sure you want to delete");
                 $('div.modal-body').children('h6').removeClass('strong');
                 $('div.modal-body').children('p').show();
                 $('#yes').hide();
                 $('button.remove-from-db').show();
-
+                $('#yes').removeAttr('disabled');
+                $('div.modal-footer').children('button.btn-secondary').removeAttr('disabled');
                 return
               },1000);
             }, HIDE_MODAL_DELAY);
+            return;
           }
+            // If error
+            $('div.modal-body').children('h6').text("FAILED: INTERNAL SERVER ERROR CONTACT ADMINISTRATOR");
+            setTimeout(() => {location.reload(true)}, HIDE_MODAL_DELAY)
           return;
         });
         return;
