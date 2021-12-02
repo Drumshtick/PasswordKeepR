@@ -1,6 +1,6 @@
 $(document).ready(function() {
-  // On click of clipboard in passwords data elements
   $('i.fa-clipboard').on("click touchstart", function() {
+    // On click of clipboard in passwords data elements
     // Get the element that was clicked
     const elementText = $(this).siblings(".value-wrapper")
       .children('.data-value')
@@ -18,6 +18,8 @@ $(document).ready(function() {
   });
 
   $('button.changeToggle').on('click touchstart', function() {
+    // If edit button is clicked and has the class edit treat as edit button
+    // change edit button to save and add class save, remove class edit
     if ($(this).hasClass('edit')) {
     const editButton = $(this);
     const deleteButton = $(this).siblings('button.delete');
@@ -37,15 +39,20 @@ $(document).ready(function() {
 
       $(username).parent().append('<input class="data data-value" type="text" name="username" class="form-control" value="'+$(username).text()+'">');
       $(username).hide();
+
       $(password).hide();
       $(password).parent().append('<input class="data data-value" type="text" name="password-text" class="form-control" value="'+$(password).text()+'">');
+
       $(deleteButton).addClass('cancel');
       $(deleteButton).text('Cancel');
+
       $(editButton).removeClass('edit');
-      $(editButton).addClass('save btn-secondary');
+      $(editButton).addClass('save ');
       $(editButton).text('Save');
       return;
   }
+  // if button has save class treat it as save button
+  // and post updated password info
   if ($('button.changeToggle').hasClass('save')) {
     const targetParent =$(this).parent().parent();
 
@@ -59,8 +66,7 @@ $(document).ready(function() {
       const url = $(targetParent).children('header').children('div').children('a').text();
 
       $.post('http://localhost:8080/edit', {username, password, url})
-      .then((response) => {
-        console.log(response);
+      .then(() => {
         const cancelButton = $('button.cancel');
         const saveButton = $('button.save');
         if (cancelButton.hasClass('cancel')) {
@@ -87,8 +93,8 @@ $(document).ready(function() {
           $(saveButton).removeClass('save btn-secondary');
           $(saveButton).text("Edit");
           $(saveButton).addClass('edit');
-          return;
         }
+        return;
       })
       .catch((err) => {console.log(err.message)});
       return;
