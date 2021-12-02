@@ -23,10 +23,12 @@ $(document).ready(function() {
       $(username).hide();
       $(username).parent().append('<input class="data data-value" type="text" name="username" class="form-control" value="'+$(username).text()+'">');
       $('div.data-wrapper.password').addClass('editMode');
+      $('div.data-wrapper.password').children('div.title-wrapper').children('p').text('username    (click to edit)');
 
       $(password).hide();
       $(password).parent().append('<input class="data data-value" type="text" name="password-text" class="form-control" value="'+$(password).text()+'">');
       $('div.data-wrapper.username').addClass('editMode');
+      $('div.data-wrapper.username').children('div.title-wrapper').children('p').text('password    (click to edit)');
 
       $(deleteButton).hide();
       $(deleteButton).siblings('button.cancel').show();
@@ -77,16 +79,24 @@ $(document).ready(function() {
             $(username).parent().children('p').text(response.username);
             $(username).parent().children('p').show();
             $(username).remove();
+
             $(password).parent().children('p').text(response.password);
             $(password).parent().children('p').show();
             $(password).remove();
+
             $(cancelButton).hide();
             $(cancelButton).siblings('button.delete').show();
-            // $(cancelButton).removeClass('cancel');
-            // $(cancelButton).text('Delete');
+
             $(saveButton).removeClass('save btn-secondary');
             $(saveButton).text("Edit");
             $(saveButton).addClass('edit');
+
+            $('div.data-wrapper.username').removeClass('editMode');
+            $('div.data-wrapper.username').children('div.title-wrapper').children('p').text('username');
+
+            $('div.data-wrapper.password').removeClass('editMode');
+            $('div.data-wrapper.password').children('div.title-wrapper').children('p').text('password');
+
             return;
         }
       })
@@ -116,6 +126,13 @@ $(document).ready(function() {
 
         $(username).parent().children('p').show();
         $(username).remove();
+
+        $('div.data-wrapper.username').removeClass('editMode');
+        $('div.data-wrapper.username').children('div.title-wrapper').children('p').text('username');
+
+        $('div.data-wrapper.password').removeClass('editMode');
+        $('div.data-wrapper.password').children('div.title-wrapper').children('p').text('password');
+
         $(password).parent().children('p').show();
         $(password).remove();
         // $(cancelButton).removeClass('cancel');
