@@ -149,7 +149,17 @@ const writePassTodb = function(data) {
 
 passwordRouter.post("/", (req, res) => {
   const { user_id } = req.session;
-  const {organisationName, category, url, username} = req.body;
+  let {organisationName, category, url, username} = req.body;
+  if (url.substring(0, 8) === 'https://') {
+    console.log("first true");
+    url = url.substring(8, url.length);
+  }
+
+  if (url.substring(0, 7) === 'http://') {
+    console.log('second true');
+    url = url.substring(7, url.length);
+  }
+  console.log(url);
   if(req.body.length){
     const password_text = passwordGenerator(req);
     getOrgID(organisationName).then((result) => {

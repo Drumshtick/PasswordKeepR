@@ -25,7 +25,11 @@
         <article class="password-entry card">
           <header class="url">
             <h5>URL</h1>
+              <% if (db_results[index].url.substring(0, 7) === 'https://' || db_results[index].url.substring(0, 6) === 'http://') {%>
               <div><a href="<%= db_results[index].url %>" target="_blank"><%= db_results[index].url %></a></div>
+              <% } else if (db_results[index].url.substring(0, 7) !== 'https://' || db_results[index].url.substring(0, 6) !== 'http://') {%>
+              <div><a href="https://<%= db_results[index].url %>" target="_blank"><%= db_results[index].url %></a></div>
+              <% } %>
             </header>
             <section class="password-data">
               <div class="data-wrapper username">
