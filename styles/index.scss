@@ -190,3 +190,24 @@ input.data:focus {
   border: none;
   outline: none;
 }
+
+div.modal-header button.fas.fa-times-circle {
+  font-size: 2em;
+  color: rgba(128, 128, 128, .9);
+  border: none;
+  background-color: none !important;
+  border-radius: 240px;
+  width: 1em;
+  cursor: pointer;
+  transition: background-color 1s, transform 1s;
+}
+button.fas.fa-times-circle:hover {
+  background-color: rgba(169, 169, 169, 1);
+  transform: scaleX(0.85);
+}
+button.fas.fa-times-circle:focus {
+  outline: none;
+}
+button.remove-from-db {
+  font-weight: 700;
+}

@@ -10,7 +10,6 @@ indexRoute.get("/", (req, res) => {
   const { user_id } = req.session;
   getPasswords(user_id)
   .then((db_results) => {
-    console.log(db_results);
     //if results are returned display them
     if (db_results.length > 0) {
       return res.render("index", {db_results, noEntries: false});

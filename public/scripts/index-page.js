@@ -64,7 +64,8 @@ $(document).ready(function() {
       .children('div.data-wrapper.password').children('div.value-wrapper')
       .children('input.data').val();
       const url = $(targetParent).children('header').children('div').children('a').text();
-
+      // AJAX POST
+      // -----------------------------------------------
       $.post('http://localhost:8080/edit', {username, password, url})
       .then(() => {
         const cancelButton = $('button.cancel');
@@ -132,6 +133,22 @@ $(document).ready(function() {
       $(saveButton).text("Edit");
       $(saveButton).addClass('edit');
     }
+  });
+
+  $('button.delete').on('click', function() {
+    const targetParent =$(this).parent().parent();
+    const url = $(targetParent).children('header').children('div').children('a').text();
+    const username =$(targetParent).children('section.password-data')
+    .children('div.data-wrapper.username').children('div.value-wrapper')
+      .children('p.data-value').text();
+    $('button.remove-from-db').on('click', function() {
+      // AJAX POST
+      // ------------------------------------------------
+      $.post('http://localhost:8080/delete', {username, url})
+      .then((response) => {
+        console.log(response);
+      })
+    });
   });
 });
 
