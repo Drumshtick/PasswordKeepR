@@ -109,7 +109,6 @@ $(document).ready(function() {
   $('button.noChange').on('click touchstart' ,function() {
     const cancelButton = $(this);
     const saveButton = $(this).siblings('button.changeToggle');
-    if (cancelButton.hasClass('cancel')) {
       // When edit button is clicked
       // create input fields and changed edit to save button
       const targetParent =$(this).parent().parent();
@@ -132,23 +131,6 @@ $(document).ready(function() {
       $(saveButton).removeClass('save btn-secondary');
       $(saveButton).text("Edit");
       $(saveButton).addClass('edit');
-    }
-  });
-
-  $('button.delete').on('click', function() {
-    const targetParent =$(this).parent().parent();
-    const url = $(targetParent).children('header').children('div').children('a').text();
-    const username =$(targetParent).children('section.password-data')
-    .children('div.data-wrapper.username').children('div.value-wrapper')
-      .children('p.data-value').text();
-    $('button.remove-from-db').on('click', function() {
-      // AJAX POST
-      // ------------------------------------------------
-      $.post('http://localhost:8080/delete', {username, url})
-      .then((response) => {
-        console.log(response);
-      })
-    });
   });
 });
 

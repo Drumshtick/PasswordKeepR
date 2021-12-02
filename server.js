@@ -50,12 +50,14 @@ const login = require('./routes/login');
 const createPasswordRoutes = require("./routes/password_gen");
 const indexRoute = require("./routes/index");
 const editRoute = require("./routes/edit");
+const deleteRoute = require('./routes/delete');
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/users", usersRoutes(db));
 app.use('/login', login());
 app.use("/", indexRoute);
 app.use("/edit", editRoute);
+app.use('/delete', deleteRoute);
 app.use("/password_gen", createPasswordRoutes);
 // Note: mount other resources here, using the same pattern above
 

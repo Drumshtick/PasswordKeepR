@@ -139,6 +139,7 @@ main {
     width: 80%;
     height: auto;
     color: #ffff;
+    transition: transform 1s, box-shadow 1s;
     header {
       display: flex;
       align-items: center;
@@ -210,4 +211,12 @@ button.fas.fa-times-circle:focus {
 }
 button.remove-from-db {
   font-weight: 700;
+}
+.strong {
+  font-size: 2em;
+  color: red;
+}
+
+article.no-entries {
+  width: 80%;
 }
