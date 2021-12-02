@@ -17,45 +17,114 @@ $(document).ready(function() {
       });
   });
 
-  $('button.edit').on('click touchstart', function() {
-    // When edit button is clicked
-    // create input fields and changed edit to save button
+  $('button.changeToggle').on('click touchstart', function() {
+    if ($(this).hasClass('edit')) {
+    const editButton = $(this);
+    const deleteButton = $(this).siblings('button.delete');
+      // When edit button is clicked
+      // create input fields and changed edit to save button
+      const targetParent =$(this).parent().parent();
+
+      const username =$(targetParent).children('section.password-data')
+      .children('div.data-wrapper.username').children('div.value-wrapper')
+      .children('p.data-value');
+
+
+      const password =$(targetParent).children('section.password-data')
+      .children('div.data-wrapper.password').children('div.value-wrapper')
+      .children('p.data-value');
+
+
+      $(username).parent().append('<input class="data data-value" type="text" name="username" class="form-control" value="'+$(username).text()+'">');
+      $(username).hide();
+      $(password).hide();
+      $(password).parent().append('<input class="data data-value" type="text" name="password-text" class="form-control" value="'+$(password).text()+'">');
+      $(deleteButton).addClass('cancel');
+      $(deleteButton).text('Cancel');
+      $(editButton).removeClass('edit');
+      $(editButton).addClass('save btn-secondary');
+      $(editButton).text('Save');
+      return;
+  }
+  if ($('button.changeToggle').hasClass('save')) {
     const targetParent =$(this).parent().parent();
 
     const username =$(targetParent).children('section.password-data')
     .children('div.data-wrapper.username').children('div.value-wrapper')
-    .children('p.data-value');
-
-    const password =$(targetParent).children('section.password-data')
-    .children('div.data-wrapper.password').children('div.value-wrapper')
-    .children('p.data-value');
-
-    const button = $(this);
-
-    $(username).replaceWith('<input class="data" type="text" name="username" class="form-control" value="'+$(username).text()+'">');
-
-    $(password).replaceWith('<input class="data" type="text" name="password-text" class="form-control" value="'+$(password).text()+'">');
-
-    $(button).replaceWith('<button type="button" style="background-color: purple;" class="edit save btn btn-primary">Save</button>');
-    // Event listener for save button to make the POST
-    $('button.save').on('click', function() {
-
-      const targetParent =$(this).parent().parent();
-
-      const username =$(targetParent).children('section.password-data')
-        .children('div.data-wrapper.username').children('div.value-wrapper')
-        .children('input.data').val();
+      .children('input.data').val();
 
       const password =$(targetParent).children('section.password-data')
-        .children('div.data-wrapper.password').children('div.value-wrapper')
-        .children('input.data').val();
+      .children('div.data-wrapper.password').children('div.value-wrapper')
+      .children('input.data').val();
       const url = $(targetParent).children('header').children('div').children('a').text();
 
       $.post('http://localhost:8080/edit', {username, password, url})
-        .catch((err) => {console.log(err.message)});
-    });
-  });
+      .then((response) => {
+        console.log(response);
+        const cancelButton = $('button.cancel');
+        const saveButton = $('button.save');
+        if (cancelButton.hasClass('cancel')) {
+          // When edit button is clicked
+          // create input fields and changed edit to save button
+          const targetParent =$(this).parent().parent();
 
+          const username =$(targetParent).children('section.password-data')
+
+          .children('div.data-wrapper.username').children('div.value-wrapper')
+          .children('input.data-value');
+
+          const password =$(targetParent).children('section.password-data')
+          .children('div.data-wrapper.password').children('div.value-wrapper')
+          .children('input.data-value');
+
+
+          $(username).parent().children('p').show();
+          $(username).remove();
+          $(password).parent().children('p').show();
+          $(password).remove();
+          $(cancelButton).removeClass('cancel');
+          $(cancelButton).text('Delete');
+          $(saveButton).removeClass('save btn-secondary');
+          $(saveButton).text("Edit");
+          return;
+        }
+      })
+      .catch((err) => {console.log(err.message)});
+      return;
+    }
+});
+
+  // // Event listener for save button to make the POST
+  // $('button.changeToggle').on('click', function() {
+
+  // });
+  $('button.noChange').on('click touchstart' ,function() {
+    const cancelButton = $(this);
+    const saveButton = $(this).siblings('button.changeToggle');
+    if (cancelButton.hasClass('cancel')) {
+      // When edit button is clicked
+      // create input fields and changed edit to save button
+      const targetParent =$(this).parent().parent();
+
+      const username =$(targetParent).children('section.password-data')
+      .children('div.data-wrapper.username').children('div.value-wrapper')
+      .children('input.data-value');
+
+      const password =$(targetParent).children('section.password-data')
+      .children('div.data-wrapper.password').children('div.value-wrapper')
+      .children('input.data-value');
+
+
+      $(username).parent().children('p').show();
+      $(username).remove();
+      $(password).parent().children('p').show();
+      $(password).remove();
+      $(cancelButton).removeClass('cancel');
+      $(cancelButton).text('Delete');
+      $(saveButton).removeClass('save btn-secondary');
+      $(saveButton).text("Edit");
+    }
+  });
 });
 
 

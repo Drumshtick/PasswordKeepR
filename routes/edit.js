@@ -28,8 +28,11 @@ editRouter.post('/', (req, res) => {
 
   editPasswordEntry(data)
   .then((db_results) => {
-console.log("UPDATED Table");
+    console.log("UPDATED Table");
   })
+  .catch((err) => {
+    console.log("ERROR in editRouter.post('/') (edit.js)");
+  });
 });
 
 
@@ -46,31 +49,13 @@ const editPasswordEntry = function(data){
               `;
   const queryParams = [data.password, data.username, data.user_id, data.url];
 
-
-  // if (data.password !== undefined) {
-  //   queryParams.push(data.password);
-  //   query += ` password_text = $${queryParams.length}, `
-  // }
-
-
-  //   queryParams.push(data.username);
-  //   query += ` username = $${queryParams.length} `
-  // }
-
-  // queryParams.push(data.user_id);
-  // query += ` WHERE user_id = $${queryParams.length} `;
-
-  // queryParams.push(data.url);
-  // query += ` AND url = $${queryParams.length} RETURNING *;`
-
-  console.log(query);
   return db
   .query(query, queryParams)
   .then((db_results) => {
     return db_results.rows;
   })
   .catch((err) => {
-    console.log("Inside editPasswordEntry(" + data +")");
+    console.log("Inside editPasswordEntry()");
     console.log(err.message);
   });
 };

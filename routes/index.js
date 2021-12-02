@@ -32,7 +32,8 @@ const getPasswords = function(user_id) {
   FROM passwords
   JOIN organizations ON organization_id = organizations.id
   JOIN users ON passwords.user_id = users.id
-  WHERE user_id = $1;
+  WHERE user_id = $1
+  ORDER BY organization_id;
   `, [user_id])
   .then((result) => {
     return result.rows;
