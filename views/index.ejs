@@ -18,6 +18,7 @@
 <body>
 
   <%- include('partials/_header') %>
+  <div id="alert_placeholder"></div>
   <% if (!noEntries) { %>
     <main id="passwords-container">
       <% for (let index in db_results) {%>

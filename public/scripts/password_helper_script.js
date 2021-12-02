@@ -91,9 +91,10 @@ $(document).ready(function () {
       .then(function (response) {
 
         console.log("response from the server is: ", response);
-        const notification = 'Typed password created! Go to the homepage to view it!';
+        const notification = 'Password created! Redirecting to homepage';
         fillAlert(notification);
         dismissAlert();
+        setTimeout(function () {window.location.href = "http://localhost:8080/"}, 2000) ;
       });
 
     });
@@ -141,9 +142,10 @@ $(document).ready(function () {
       })
       .then(function (response) {
         console.log("response from the server is: ", response);
-        const notification = 'Typed password created! Go to the homepage to view it!';
+        const notification = 'Password created! Redirecting to homepage!';
         fillAlert(notification);
         dismissAlert();
+        setTimeout(function () {window.location.href = "http://localhost:8080/"}, 2000) ;
       });
     });
   }
