@@ -23,12 +23,12 @@ $(document).ready(function() {
       $(username).hide();
       $(username).parent().append('<input class="data data-value" type="text" name="username" class="form-control" value="'+$(username).text()+'">');
       $('div.data-wrapper.password').addClass('editMode');
-      $('div.data-wrapper.password').children('div.title-wrapper').children('p').text('username    (click to edit)');
+      $('div.data-wrapper.password').children('div.title-wrapper').children('p').text('password    (click to edit)');
 
       $(password).hide();
       $(password).parent().append('<input class="data data-value" type="text" name="password-text" class="form-control" value="'+$(password).text()+'">');
       $('div.data-wrapper.username').addClass('editMode');
-      $('div.data-wrapper.username').children('div.title-wrapper').children('p').text('password    (click to edit)');
+      $('div.data-wrapper.username').children('div.title-wrapper').children('p').text('username    (click to edit)');
 
       $(deleteButton).hide();
       $(deleteButton).siblings('button.cancel').show();
