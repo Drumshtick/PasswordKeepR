@@ -1,6 +1,6 @@
 const express = require('express');
 const checkPasswordRouter  = express.Router();
-const passCheck = require('passw0rd');
+const hibp = require ('haveibeenpwned') ();
 
 
 checkPasswordRouter.post('/', (req, res) => {
@@ -19,6 +19,7 @@ const checkPassword = function(password) {
   console.log(password);
   return passCheck.check(password)
   .then((result) => {
+    console.log(result);
     return result.count;
   })
 };
