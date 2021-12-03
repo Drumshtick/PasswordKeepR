@@ -1,7 +1,7 @@
 $(document).ready(function() {
-  const articles = $()
-  $('article.password-entry').each(function() {
-    let password = $('article.password-entry').children('section.password-data')
+  const articles = $('article.password-entry');
+  for (const article of articles) {
+    let password = $(article).children('section.password-data')
     .children('div.data-wrapper.password').children('div.value-wrapper')
     .children('p.data-value').text();
     console.log(password);
@@ -9,5 +9,5 @@ $(document).ready(function() {
     .then((response) => {
       console.log(response);
     });
-  });
+  }
 });
